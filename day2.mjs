@@ -25,3 +25,15 @@ function safe(r) {
 
   return true;
 }
+
+// part 2
+let numSafe2 = 0;
+reports.forEach((r, i) => {
+  if (safe(r)) { numSafe2++; return; }
+
+  for (let j = 0; j < r.length; j++) {
+    if (safe(r.toSpliced(j, 1))) { numSafe2++; return; }
+  }
+});
+
+log('part 2:', numSafe2);
