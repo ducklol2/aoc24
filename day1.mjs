@@ -21,4 +21,22 @@ for (let i = 0; i < list1.length; i++) {
   sum += Math.abs(list1[i] - list2[i]);
 }
 
-console.log(sum);
+console.log(`part 1: ${sum}`);
+
+let similarity = 0;
+for (const num1 of list1) {
+  const first = list2.indexOf(num1);
+  const last = list2.lastIndexOf(num1);
+
+  log(num1, first, last);
+
+  if (first >= 0) {
+    similarity += num1 * (last - first + 1);
+  }
+}
+
+console.log(`part 2: ${similarity}`);
+
+function log(...args) {
+  console.log(...args.flatMap(a => [a, '\t']));
+}
