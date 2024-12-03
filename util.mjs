@@ -6,6 +6,8 @@ export function log(...args) {
 
 export function readDay(day, fn) {
   const text = fs.readFileSync(`day${day}.txt`, 'utf8');
+  if (!fn) return text;
+
   const lines = text.split('\n');
   console.log('Read', lines.length, 'lines');
 
