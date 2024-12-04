@@ -36,7 +36,8 @@ for (let x = 0; x < chars[0].length; x++) {
         for (let k = 0; k < word.length; k++) {
           const xk = x + dir[0] * k;
           const yk = y + dir[1] * k;
-          if (xk < 0 || xk >= chars[0].length || yk < 0 || yk >= chars.length) continue dirLoop;
+          if (xk < 0 || xk >= chars[0].length || yk < 0 || yk >= chars.length)
+            continue dirLoop;
           try {
             if (chars[yk][xk] != word[k]) continue dirLoop;
           } catch (err) {
@@ -51,3 +52,27 @@ for (let x = 0; x < chars[0].length; x++) {
 }
 
 log('part 1:', found);
+
+// part 2
+let found2 = 0;
+for (let x = 0; x < chars[0].length; x++) {
+  for (let y = 0; y < chars.length; y++) {
+    if (matchMas(x, y, [1, 1]) && matchMas(x + 2, y, [-1, 1])) found2++;
+  }
+}
+
+function matchMas(x, y, dir) {
+  wordLoop: for (let word of ['MAS'.split(''), 'SAM'.split('')]) {
+    for (let k = 0; k < word.length; k++) {
+      const xk = x + dir[0] * k;
+      const yk = y + dir[1] * k;
+      if (xk < 0 || xk >= chars[0].length || yk < 0 || yk >= chars.length)
+        continue wordLoop;
+      if (chars[yk][xk] != word[k]) continue wordLoop;
+    }
+    return true;
+  }
+  return false;
+}
+
+log('part 2:', found2);
