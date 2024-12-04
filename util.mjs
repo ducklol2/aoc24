@@ -4,8 +4,8 @@ export function log(...args) {
   console.log(...args.flatMap(a => [a, '\t']));
 }
 
-export function readDay(day, fn) {
-  const text = fs.readFileSync(`day${day}.txt`, 'utf8');
+export function readDay(dayOrFile, fn) {
+  const text = fs.readFileSync(typeof dayOrFile === 'number' ? `day${dayOrFile}.txt` : dayOrFile, 'utf8');
   if (!fn) return text;
 
   const lines = text.split('\n');
